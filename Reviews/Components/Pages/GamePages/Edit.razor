@@ -28,6 +28,11 @@ else
                     <ValidationMessage For="() => Game.Name" class="text-danger" />
                 </div>
                 <div class="mb-3">
+                    <label for="description" class="form-label">Description:</label>
+                    <InputText id="description" @bind-Value="Game.Description" class="form-control" />
+                    <ValidationMessage For="() => Game.Description" class="text-danger" />
+                </div>
+                <div class="mb-3">
                     <label for="releasedate" class="form-label">ReleaseDate:</label>
                     <InputDate id="releasedate" @bind-Value="Game.ReleaseDate" class="form-control" />
                     <ValidationMessage For="() => Game.ReleaseDate" class="text-danger" />
