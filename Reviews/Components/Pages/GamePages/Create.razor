@@ -31,11 +31,11 @@
                 <InputDate id="releasedate" @bind-Value="Game.ReleaseDate" class="form-control" />
                 <ValidationMessage For="() => Game.ReleaseDate" class="text-danger" />
             </div>
-            <div class="mb-3">
+            @* <div class="mb-3">
                 <label for="rate" class="form-label">Rate:</label>
                 <InputNumber id="rate" @bind-Value="Game.Rate" class="form-control" />
                 <ValidationMessage For="() => Game.Rate" class="text-danger" />
-            </div>
+            </div> *@
             <div class="mb-3">
                 <label for="imageurl" class="form-label">ImageUrl:</label>
                 <InputText id="imageurl" @bind-Value="Game.ImageUrl" class="form-control" />
@@ -59,6 +59,8 @@
     private async Task AddGame()
     {
         using var context = DbFactory.CreateDbContext();
+        Game.Rate = 0;
+        Game.RatingsCount = 0;
         context.Game.Add(Game);
         await context.SaveChangesAsync();
         NavigationManager.NavigateTo("/games");

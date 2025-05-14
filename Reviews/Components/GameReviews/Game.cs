@@ -16,4 +16,5 @@ public class Game
 
 	[DataType(DataType.ImageUrl)]
 	public string? ImageUrl { get; set; }
+	public int RatingsCount { get; set; }
 }

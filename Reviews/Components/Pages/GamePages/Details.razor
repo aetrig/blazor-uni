@@ -3,6 +3,7 @@
 @using Reviews.Components.GameReviews
 @inject IDbContextFactory<Reviews.Data.ApplicationDbContext> DbFactory
 @inject NavigationManager NavigationManager
+@rendermode InteractiveServer
 
 <PageTitle>Details</PageTitle>
 
@@ -15,7 +16,8 @@
     {
         <p><em>Loading...</em></p>
     }
-    else {
+    else
+    {
         <dl class="row">
             <dt class="col-sm-2">Name</dt>
             <dd class="col-sm-10">@game.Name</dd>
@@ -27,7 +29,14 @@
             <dd class="col-sm-10">@game.Rate</dd>
             <dt class="col-sm-2">ImageUrl</dt>
             <dd class="col-sm-10">@game.ImageUrl</dd>
+            <dt class="col-sm-2">RateCount</dt>
+            <dd class="col-sm-10">@game.RatingsCount</dd>
         </dl>
+        <div class="mb-3">
+            <label for="addRating" class="form-label">Add rating:</label>
+            <InputNumber id="addRating" @bind-Value="@newRating" class="form-control" />
+        </div>
+        <button @onclick="onAddRating" class="btn btn-primary">Add Rating</button>
         <div>
             <a href="@($"/games/edit?id={game.Id}")">Edit</a> |
             <a href="@($"/games")">Back to List</a>
@@ -37,10 +46,10 @@
 
 @code {
     private Game? game;
+    private float? newRating;
 
     [SupplyParameterFromQuery]
     private int Id { get; set; }
-
     protected override async Task OnInitializedAsync()
     {
         using var context = DbFactory.CreateDbContext();
@@ -50,5 +59,17 @@
         {
             NavigationManager.NavigateTo("notfound");
         }
+    }
+
+    private async Task onAddRating()
+    {
+        using var context = DbFactory.CreateDbContext();
+        context.Attach(game!).State = EntityState.Modified;
+
+        game.Rate = (game.Rate * game.RatingsCount + newRating) / (game.RatingsCount + 1);
+        game.RatingsCount++;
+
+        await context.SaveChangesAsync();
+
     }
 }
