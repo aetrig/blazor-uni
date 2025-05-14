@@ -6,7 +6,10 @@
 @implements IAsyncDisposable
 @inject IDbContextFactory<Reviews.Data.ApplicationDbContext> DbFactory
 
+@rendermode InteractiveServer
+
 <PageTitle>Index</PageTitle>
+
 
 <h1>Index</h1>
 
@@ -15,10 +18,15 @@
 </p>
 
 <QuickGrid Class="table" Items="context.Game">
-    <PropertyColumn Property="game => game.Name" />
-    <PropertyColumn Property="game => game.Description" />
-    <PropertyColumn Property="game => game.ReleaseDate" />
-    <PropertyColumn Property="game => game.Rate" />
+    <TemplateColumn Context="game" Title="Image">
+        <img src="@(game.ImageUrl)" width="150">
+    </TemplateColumn>
+    <PropertyColumn Property="game => game.Name" Sortable="true" />
+    @* <PropertyColumn Property="game => game.Description" /> *@
+    <PropertyColumn Property="game => game.ReleaseDate" Sortable="true" Title="Release Date" />
+    <PropertyColumn Property="game => game.Rate" Sortable="true" Title="Rating" />
+    @* <PropertyColumn Property="game => game.ImageUrl" Title="Image" /> *@
+
 
     <TemplateColumn Context="game">
         <a href="@($"games/edit?id={game.Id}")">Edit</a> |

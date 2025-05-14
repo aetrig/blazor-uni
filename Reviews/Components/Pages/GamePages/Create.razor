@@ -8,33 +8,39 @@
 
 <h1>Create</h1>
 
+
 <h2>Game</h2>
 <hr />
 <div class="row">
     <div class="col-md-4">
         <EditForm method="post" Model="Game" OnValidSubmit="AddGame" FormName="create" Enhance>
             <DataAnnotationsValidator />
-            <ValidationSummary class="text-danger" role="alert"/>
+            <ValidationSummary class="text-danger" role="alert" />
             <div class="mb-3">
-                <label for="name" class="form-label">Name:</label> 
-                <InputText id="name" @bind-Value="Game.Name" class="form-control" /> 
-                <ValidationMessage For="() => Game.Name" class="text-danger" /> 
-            </div>        
+                <label for="name" class="form-label">Name:</label>
+                <InputText id="name" @bind-Value="Game.Name" class="form-control" />
+                <ValidationMessage For="() => Game.Name" class="text-danger" />
+            </div>
             <div class="mb-3">
-                <label for="description" class="form-label">Description:</label> 
-                <InputText id="description" @bind-Value="Game.Description" class="form-control" /> 
-                <ValidationMessage For="() => Game.Description" class="text-danger" /> 
-            </div>        
+                <label for="description" class="form-label">Description:</label>
+                <InputText id="description" @bind-Value="Game.Description" class="form-control" />
+                <ValidationMessage For="() => Game.Description" class="text-danger" />
+            </div>
             <div class="mb-3">
-                <label for="releasedate" class="form-label">ReleaseDate:</label> 
-                <InputDate id="releasedate" @bind-Value="Game.ReleaseDate" class="form-control" /> 
-                <ValidationMessage For="() => Game.ReleaseDate" class="text-danger" /> 
-            </div>        
+                <label for="releasedate" class="form-label">ReleaseDate:</label>
+                <InputDate id="releasedate" @bind-Value="Game.ReleaseDate" class="form-control" />
+                <ValidationMessage For="() => Game.ReleaseDate" class="text-danger" />
+            </div>
             <div class="mb-3">
-                <label for="rate" class="form-label">Rate:</label> 
-                <InputNumber id="rate" @bind-Value="Game.Rate" class="form-control" /> 
-                <ValidationMessage For="() => Game.Rate" class="text-danger" /> 
-            </div>        
+                <label for="rate" class="form-label">Rate:</label>
+                <InputNumber id="rate" @bind-Value="Game.Rate" class="form-control" />
+                <ValidationMessage For="() => Game.Rate" class="text-danger" />
+            </div>
+            <div class="mb-3">
+                <label for="imageurl" class="form-label">ImageUrl:</label>
+                <InputText id="imageurl" @bind-Value="Game.ImageUrl" class="form-control" />
+                <ValidationMessage For="() => Game.ImageUrl" class="text-danger" />
+            </div>
             <button type="submit" class="btn btn-primary">Create</button>
         </EditForm>
     </div>
@@ -48,7 +54,8 @@
     [SupplyParameterFromForm]
     private Game Game { get; set; } = new();
 
-    // To protect from overposting attacks, see https://learn.microsoft.com/aspnet/core/blazor/forms/#mitigate-overposting-attacks.
+    // To protect from overposting attacks, see
+    //https://learn.microsoft.com/aspnet/core/blazor/forms/#mitigate-overposting-attacks.
     private async Task AddGame()
     {
         using var context = DbFactory.CreateDbContext();
