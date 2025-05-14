@@ -19,7 +19,7 @@
 
 <QuickGrid Class="table" Items="context.Game">
     <TemplateColumn Context="game" Title="Image">
-        <img src="@(game.ImageUrl)" width="150">
+        <img src="@(game.ImageUrl)" style="width:10vw">
     </TemplateColumn>
     <PropertyColumn Property="game => game.Name" Sortable="true" />
     @* <PropertyColumn Property="game => game.Description" /> *@

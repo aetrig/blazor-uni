@@ -38,11 +38,16 @@ else
                     <InputDate id="releasedate" @bind-Value="Game.ReleaseDate" class="form-control" />
                     <ValidationMessage For="() => Game.ReleaseDate" class="text-danger" />
                 </div>
-                @* <div class="mb-3">
+                <div class="mb-3">
                     <label for="rate" class="form-label">Rate:</label>
                     <InputNumber id="rate" @bind-Value="Game.Rate" class="form-control" />
                     <ValidationMessage For="() => Game.Rate" class="text-danger" />
-                </div> *@
+                </div>
+                <div class="mb-3">
+                    <label for="rate" class="form-label">Rate Count:</label>
+                    <InputNumber id="rate" @bind-Value="Game.RatingsCount" class="form-control" />
+                    <ValidationMessage For="() => Game.Rate" class="text-danger" />
+                </div>
                 <div class="mb-3">
                     <label for="imageurl" class="form-label">ImageUrl:</label>
                     <InputText id="imageurl" @bind-Value="Game.ImageUrl" class="form-control" />
@@ -82,7 +87,6 @@ else
     {
         using var context = DbFactory.CreateDbContext();
         context.Attach(Game!).State = EntityState.Modified;
-
         try
         {
             await context.SaveChangesAsync();
